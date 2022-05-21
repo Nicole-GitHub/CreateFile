@@ -50,7 +50,7 @@ public class RunMain {
 				for (int ii = 0; ii < batLine && i >= 1 ; ii++) {
 					encStr = fillLen(String.valueOf(i--), 9);
 					for (int j = 1; j <= totalCol; j++)
-						str += "A" + encStr + (j < totalCol ? "," : "");
+						str += "A" + encStr + j + (j < totalCol ? "," : "");
 					str += "\n";
 				}
 
