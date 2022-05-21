@@ -21,7 +21,7 @@ public class RunMain {
 	    String encStr = "", str = "";
 	    FileOutputStream fos = null ;
 	    PrintWriter pw = null;
-    	int batLine = 10001;
+    	int batLine = 10000;
 
 		try (Scanner s = new Scanner(System.in)) {
 
