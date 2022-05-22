@@ -12,11 +12,10 @@ public class RunMain {
 
 	public static void main(String arg[]) {
 
-	    String destFile = (System.getProperty("os.name").contains("Mac")
+	    String outputPath = System.getProperty("os.name").contains("Mac")
 	    		? "/Users/nicole/Downloads/" // Mac
-	    		: "D:/Downloads/")
-				+ "plain_tmp.txt";
-		System.out.println("產出的文字檔路徑為: " + destFile);
+	    		: "D:/Downloads/";
+		System.out.println("產出的文字檔路徑為: " + outputPath);
 	    
 	    String encStr = "", str = "";
 	    FileOutputStream fos = null ;
@@ -25,12 +24,22 @@ public class RunMain {
 
 		try (Scanner s = new Scanner(System.in)) {
 
-		    System.out.print("請輸入要產出的ROW: ");
+			System.out.print("請輸入要產出的檔名(不含副檔名): ");
+			String fileName = s.next() + ".txt";
+			System.out.print("請輸入是否要保留原檔內容 (y,n) : ");
+			boolean append = "Y".equals(s.next().toUpperCase());
+		    System.out.print("請輸入要產出的行數(Row): ");
 	    	int totalRow = s.nextInt();
-		    System.out.print("請輸入要產出的COL: ");
+		    System.out.print("請輸入要產出的列數(Col): ");
 	    	int totalCol = s.nextInt();
-	    	
-	    	File f = new File(destFile);
+
+			System.out.println("\n已確認檔名為: " + fileName 
+					+ "\n是否要保留原檔內容: " + (append ? "是" : "否") 
+					+ "\n要產出的行數(Row): " + totalRow 
+					+ "\n要產出的列數(Col): " + totalCol 
+					+ "\n");
+			
+			File f = new File(outputPath + fileName);
 
 	    	/**
 	    	 * createNewFile
@@ -40,7 +49,7 @@ public class RunMain {
 	    	if(f.createNewFile())
 	    		System.out.println("檔案不存在，已自動產生檔案");
 
-			fos = new FileOutputStream(f); // 第二參數設定是保留原有內容(預設false會刪)
+			fos = new FileOutputStream(f,append); // 第二參數設定是保留原有內容(預設false會刪)
 			
 			for (int i = totalRow; i >= 1;) {
 				str = "";
@@ -53,8 +62,6 @@ public class RunMain {
 						str += "A" + encStr + j + (j < totalCol ? "," : "");
 					str += "\n";
 				}
-
-//				System.out.println("write");
 
 				// 將整理好的內容寫入檔案內
 				fos.write(str.getBytes());

@@ -1,0 +1,13 @@
+for id in {1..150000000}; 
+do 
+	for idn in {1..5}; 
+	do 
+		printf "A%09d%d" $id $idn
+		if [ $idn -lt 5 ]
+		then
+			printf "," 
+		fi
+	; 
+	done; 
+printf "\n"; 
+done > mac_plain_col5.txt
