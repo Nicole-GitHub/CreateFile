@@ -10,6 +10,20 @@ import java.util.Scanner;
 
 public class CreateFile {
 
+	public static void main(String[] args) throws Exception {
+
+		// 判斷當前執行的啟動方式是IDE還是jar
+		boolean isStartupFromJar = new File(CreateFile.class.getProtectionDomain().getCodeSource().getLocation().getPath()).isFile();
+		System.out.println("isStartupFromJar: " + isStartupFromJar);
+
+		String path = System.getProperty("user.dir") + File.separator; // Jar
+		if(!isStartupFromJar) // IDE
+			path = System.getProperty("os.name").contains("Mac") ? "/Users/nicole/Downloads/" // Mac
+					: "D:/Downloads/"; // Win
+		
+		createFile(path);
+	}
+
 	public static void createFile(String outputPath) {
 		System.out.println("產出的文字檔路徑為: " + outputPath);
 
